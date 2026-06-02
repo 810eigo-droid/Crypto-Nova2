@@ -12,7 +12,8 @@
   ■ 画像（images/ 内）：
      images/hero-sp.webp        ヒーロー画像   1080 × 1920
      images/hero-sp2info.webp   無料ガイド案内（Heroとボタンの間） 1080 × 250
-     images/hero-sp2button.webp プレゼント受取ボタン（再利用） 1080 × 215
+     images/hero-sp2button.webp プレゼント受取ボタン（Hero/クロージング） 1080 × 215
+     images/hero-sp2-2button.webp フローティングバー用ボタン（横長） 1080 × 150
      images/section2-1.webp     共感：見出し下に差し込み（サイズ自由・自然比）
      images/section2-2.webp     共感：本文1の下に差し込み（サイズ自由・自然比）
      images/quiet1.webp         視点：見出し下 1080 × 400
@@ -313,7 +314,7 @@
   /* ===== フローティングバー（常時CTA）＆ 戻るボタン ===== */
   .floatbar{position:fixed;left:50%;bottom:0;z-index:40;width:100%;max-width:var(--maxw);
     transform:translateX(-50%) translateY(130%);transition:transform .4s var(--ease);
-    padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px));line-height:0;
+    padding:4px 8px calc(4px + env(safe-area-inset-bottom,0px));line-height:0;
     background:linear-gradient(180deg,rgba(15,26,48,.82),var(--navy));
     border-top:1px solid var(--hair);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
   .floatbar.show{transform:translateX(-50%) translateY(0)}
@@ -526,7 +527,7 @@
 <!-- フローティングバー（常時CTA） -->
 <div class="floatbar" id="floatbar">
   <a class="btn-present" href="#offer" aria-label="無料プレゼントを受け取る">
-    <img src="images/hero-sp2button.webp" alt="無料プレゼントを受け取る" onerror="this.closest('.btn-present').classList.add('noimg')">
+    <img src="images/hero-sp2-2button.webp" alt="無料プレゼントを受け取る" onerror="this.closest('.btn-present').classList.add('noimg')">
     <span class="fallback"><span class="k">無料プレゼント</span>を受け取る</span>
   </a>
 </div>
@@ -546,7 +547,7 @@
   function onScroll(){
     var h=document.documentElement;var max=h.scrollHeight-h.clientHeight;var y=h.scrollTop||window.scrollY||0;
     prog.style.width=(max>0?(y/max*100):0)+'%';
-    var show = y > 560;                 // ヒーローを過ぎたら表示
+    var show = max>0 && y > max*0.5;    // ページ中間を過ぎたら表示
     floatbar.classList.toggle('show',show);
     totop.classList.toggle('show',show);
   }
