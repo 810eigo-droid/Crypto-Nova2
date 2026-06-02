@@ -9,13 +9,19 @@
 <!--
   Crypto Nova ｜ リスト取りLP（新トンマナ：ネイビー×ゴールド×イエロー／明朝／スマホ幅統一）
   ■ レイアウト：中央 約500px のスマホ幅カラムで全画面統一。画像はすべて横1080px基準。
-  ■ Hero画像（images/ 内）：
-     images/hero-sp.webp        ヒーロー画像   1080 × 1730
+  ■ 画像（images/ 内）：
+     images/hero-sp.webp        ヒーロー画像   1080 × 1920
+     images/hero-sp2info.webp   無料ガイド案内（Heroとボタンの間） 1080 × 250
      images/hero-sp2button.webp プレゼント受取ボタン（再利用） 1080 × 215
-  ■ セクション図版プレースホルダー（任意・後で差し替え／不要なら削除）：
-     images/sec-assets.webp  共感の図   1080 × 1080（正方形）
-     images/sec-steps.webp   3ステップ  1080 × 1350（縦長4:5）
-     images/sec-ai.webp      AI解析の図 1080 × 1080（正方形）
+     images/section2-1.webp     共感：見出し下に差し込み（サイズ自由・自然比）
+     images/section2-2.webp     共感：本文1の下に差し込み（サイズ自由・自然比）
+     images/sec-steps.webp      オファー：3ステップ図（任意） 1080 × 1350
+     images/sec-ai.webp         信頼：AI解析の図（任意） 1080 × 1080
+  ■ 背景の和柄タイル（1024×1024・透明背景・線のみ推奨）：
+     images/Qinghai-wave-square1.webp 青海波 → ① 共感
+     images/hemp-square2.webp         麻の葉 → 区切りの一言
+     images/Saaya-squere3.webp        紗綾形 → ④ 信頼
+     images/Art-Deco-squere4.webp     アールデコ → クロージング
   公開：https://810eigo-droid.github.io/Crypto-Nova2/
   [REPLACE] LINE_URL：公式LINEの友だち追加URLに差し替え
   [REPLACE] フォームの送信先（utage等）：submitEmail() 内
@@ -148,14 +154,22 @@
 
   /* ===== Hero ===== */
   .hero{position:relative;z-index:1;padding:0 0 44px}
-  .hero-figure{position:relative;width:100%;aspect-ratio:1080/1730;background:linear-gradient(160deg,#1d2e52,var(--navy))}
+  .hero-figure{position:relative;width:100%;aspect-ratio:1080/1920;background:linear-gradient(160deg,#1d2e52,var(--navy))}
   .hero-figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
   .hero-figure .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:24px}
   .hero-figure .ph .pf{position:absolute;inset:18px;border:1px dashed var(--hair)}
   .hero-figure .ph b{color:var(--gold-hi);font-size:17px;letter-spacing:.1em}
   .hero-figure .ph code{color:var(--gold-mid);font-size:13px;letter-spacing:.1em}
   .hero-figure .ph small{color:var(--ink-soft);font-size:12px;letter-spacing:.16em}
-  .hero .btn-present{margin-top:30px;padding:0 24px}
+  /* Hero画像とボタンの間の案内画像（1080×450） */
+  .hero-info{position:relative;width:100%;aspect-ratio:1080/250;background:transparent;margin-top:18px}
+  .hero-info img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .hero-info .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:18px}
+  .hero-info .ph .pf{position:absolute;inset:14px;border:1px dashed var(--hair)}
+  .hero-info .ph b{color:var(--gold-hi);font-size:15px;letter-spacing:.1em}
+  .hero-info .ph code{color:var(--gold-mid);font-size:12.5px}
+  .hero-info .ph small{color:var(--ink-soft);font-size:11.5px;letter-spacing:.14em}
+  .hero .btn-present{margin-top:26px;padding:0 24px}
   .hero .btn-cap{padding:0 24px}
 
   /* ===== オファー ===== */
@@ -195,6 +209,19 @@
   .figure{position:relative;width:100%;border:1px solid var(--hair-soft);border-radius:10px;overflow:hidden;background:var(--navy-2);margin:6px 0 4px}
   .figure.sq{aspect-ratio:1/1}
   .figure.tall{aspect-ratio:1080/1350}
+  .figure.full{border:0;border-radius:0;margin:0}
+
+  /* 本文中に差し込む画像（サイズ自由・自然な縦横比で表示） */
+  .imgslot{position:relative;margin:22px 0;border-radius:10px;overflow:hidden}
+  .imgslot img{display:block;width:100%;height:auto;border-radius:10px}
+  .imgslot .ph2{display:none}
+  .imgslot.noimg{border:1px dashed var(--hair)}
+  .imgslot.noimg img{display:none}
+  .imgslot.noimg .ph2{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:6px;min-height:180px;text-align:center;padding:24px;color:var(--ink-soft)}
+  .imgslot.noimg .ph2 .pf{position:absolute;inset:14px;border:1px dashed var(--hair-soft)}
+  .imgslot.noimg .ph2 b{color:var(--gold-hi);font-size:15px;letter-spacing:.1em}
+  .imgslot.noimg .ph2 code{color:var(--gold-mid);font-size:12.5px}
   .figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
   .figure .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;padding:20px}
   .figure .ph .pf{position:absolute;inset:16px;border:1px dashed var(--hair)}
@@ -203,11 +230,11 @@
   .figure .ph small{color:var(--ink-soft);font-size:11.5px;letter-spacing:.14em}
 
   /* ===== 区切りの一言 ===== */
-  .interlude{text-align:center;padding:54px 24px}
+  .interlude{position:relative;z-index:1;text-align:center;padding:54px 24px}
   .interlude p{font-size:clamp(19px,5.6vw,24px);font-weight:700;line-height:1.95;color:var(--white)}
 
   /* ===== クロージング ===== */
-  .closing{text-align:center;padding:72px 24px 84px}
+  .closing{position:relative;z-index:1;text-align:center;padding:72px 24px 84px}
   .closing h2{font-size:clamp(26px,7.6vw,34px)}
 
   /* ===== フッター ===== */
@@ -215,6 +242,48 @@
   .footer-brand{text-align:center;font-weight:800;letter-spacing:.3em;color:var(--gold-mid);font-size:15px;margin-bottom:20px}
   .disclaimer{font-size:11px;color:#7a86a0;line-height:1.9;list-style:none}
   .disclaimer li{margin-bottom:5px;padding-left:1em;text-indent:-1em}
+
+  /* ===== セクション背景バリエーション（高級感を保った変化） ===== */
+  /* 明暗のリズム */
+  .bg-deep{background:linear-gradient(180deg,var(--navy-deep),#0c1730)}
+  .bg-glow{background:radial-gradient(120% 72% at 50% 0%, #21345d 0%, transparent 68%)}
+  /* 柄は ::before で極薄に重ねる（上だけ濃く、下はフェード） */
+  .p-diag::before,.p-dots::before,.p-img::before{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 66%,transparent 100%);
+            mask-image:linear-gradient(180deg,#000 0%,#000 66%,transparent 100%);
+  }
+  .p-diag::before{opacity:.55;background:repeating-linear-gradient(45deg,transparent 0 24px,var(--hair-soft) 24px 25px)}
+  .p-dots::before{opacity:.6;background:radial-gradient(var(--hair-soft) 1.2px,transparent 1.5px);background-size:24px 24px}
+  /* 生成した和柄タイルを使う場合：要素に class="... p-img" と style="--bg:url(images/xxx.webp)" を付与 */
+  .p-img::before{opacity:.2;background-image:var(--bg);background-size:300px auto;background-repeat:repeat;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 84%,transparent 100%);
+            mask-image:linear-gradient(180deg,#000 0%,#000 84%,transparent 100%)}
+  /* 上下のゴールド極細罫でセクションを“額装”する任意装飾 */
+  .framed{border-top:1px solid var(--hair-soft);border-bottom:1px solid var(--hair-soft)}
+
+  /* ===== 明るい特別パネル（オファー：招待状/証書の佇まい） ===== */
+  .offer.light{background:linear-gradient(180deg,#F7F2E6,#EEE5D1);border-color:rgba(201,162,39,.6);
+    box-shadow:0 22px 54px -26px rgba(0,0,0,.6)}
+  .offer.light::before{background:linear-gradient(90deg,var(--gold),var(--gold-hi),var(--gold))}
+  .offer.light .body,.offer.light p{color:#3a3526}
+  .offer.light h2{color:var(--navy)}
+  .offer.light h2 .small{color:#7a6f55}
+  .offer.light .metal{background:linear-gradient(176deg,#b8901c,#8a6a12);
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:none}
+  .offer.light .body strong{color:var(--navy)}
+  .offer.light .key{color:var(--navy);-webkit-text-fill-color:var(--navy);
+    -webkit-background-clip:border-box;background-clip:border-box;
+    background:linear-gradient(transparent 60%,rgba(255,214,51,.7) 60%);font-weight:800;filter:none}
+  .offer.light .checklist li{color:var(--navy);border-color:rgba(201,162,39,.32)}
+  .offer.light .checklist li::before{border-color:#9c7a1c}
+  .offer.light .or{color:#7a6f55}
+  .offer.light .or::before,.offer.light .or::after{background:rgba(201,162,39,.4)}
+  .offer.light .mailrow input{background:#fff;border-color:rgba(201,162,39,.5);color:var(--navy)}
+  .offer.light .mailrow input::placeholder{color:#9aa0ad}
+  .offer.light .mail-sub{border-color:#b8901c;color:#8a6a12}
+  .offer.light .mail-sub:hover{background:#b8901c;color:#fff}
+  .offer.light .form-note{color:#7a6f55}
 
   /* スクロール演出 */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
@@ -246,16 +315,20 @@
         <span class="pf"></span>
         <b>Hero ビジュアル</b>
         <code>images/hero-sp.webp</code>
-        <small>1080 × 1730</small>
+        <small>1080 × 1920</small>
       </div>
       <img src="images/hero-sp.webp" alt="はじめての暗号資産ガイド｜Crypto Nova" onerror="this.style.display='none'">
+    </div>
+
+    <div class="hero-info">
+      <div class="ph" aria-hidden="true"><span class="pf"></span><b>はじめての方向け 無料ガイド案内</b><code>images/hero-sp2info.webp</code><small>1080 × 250</small></div>
+      <img src="images/hero-sp2info.webp" alt="はじめての方向け 無料ガイドのご案内" onerror="this.style.display='none'">
     </div>
 
     <a class="btn-present" href="#offer" aria-label="無料プレゼントを受け取る">
       <img src="images/hero-sp2button.webp" alt="無料プレゼントを受け取る" onerror="this.closest('.btn-present').classList.add('noimg')">
       <span class="fallback"><span class="k">無料プレゼント</span>を受け取る</span>
     </a>
-    <p class="btn-cap">※情報提供を目的とした内容です。投資助言・売買推奨ではありません。</p>
   </section>
 
   <!-- ===== 01 共感 ===== -->
@@ -263,17 +336,25 @@
     <div class="wrap">
       <div class="rule reveal"></div>
       <h2 class="reveal" data-d="1">「興味はある。でも、よく分からない」<br>——そのまま、何年が過ぎたでしょうか。</h2>
-      <div class="figure sq reveal" data-d="1">
-        <div class="ph" aria-hidden="true"><span class="pf"></span><b>共感の図（任意）</b><code>images/sec-assets.webp</code><small>1080 × 1080</small></div>
-        <img src="images/sec-assets.webp" alt="" onerror="this.closest('.figure').style.display='none'">
-      </div>
+
+      <figure class="imgslot reveal" data-d="1">
+        <img src="images/section2-1.webp" alt="" onerror="this.closest('.imgslot').classList.add('noimg')">
+        <span class="ph2" aria-hidden="true"><span class="pf"></span><b>画像</b><code>images/section2-1.webp</code></span>
+      </figure>
+
       <p class="body reveal" data-d="2">ニュースで「ビットコインが最高値」と聞くたび、少し気になる。でも、怪しい話に巻き込まれたくないし、損もしたくない。だから結局、銀行とNISAのまま、見送ってきた。</p>
+
+      <figure class="imgslot reveal" data-d="1">
+        <img src="images/section2-2.webp" alt="" onerror="this.closest('.imgslot').classList.add('noimg')">
+        <span class="ph2" aria-hidden="true"><span class="pf"></span><b>画像</b><code>images/section2-2.webp</code></span>
+      </figure>
+
       <p class="body reveal" data-d="2">その慎重さは、間違っていません。ただ——「分からないから」と「やらない」の間で止まっているなら、<strong>足りないのは勇気ではなく、<span class="key">“判断するための材料”</span></strong>かもしれません。</p>
     </div>
   </section>
 
   <!-- ===== 区切りの一言 ===== -->
-  <div class="interlude">
+  <div class="interlude bg-deep framed p-img" style="--bg:url(images/Qinghai-wave-square1.webp)">
     <div class="ornament reveal"><i></i></div>
     <p class="reveal" data-d="1">同じニュースを見ても、<br>動く人と、見送る人がいる。</p>
     <div class="ornament reveal" style="margin-top:26px"><i></i></div>
@@ -283,7 +364,7 @@
   <section class="sec">
     <div class="wrap">
       <div class="eyebrow reveal">A QUIET WAY TO BEGIN</div>
-      <h2 class="reveal" data-d="1">「なんとなく」で買わない人は、<br>何を見ているのか。</h2>
+      <h2 class="reveal" data-d="1">「なんとなく」で買わない人は、何を見ているのか。</h2>
       <p class="body reveal" data-d="2">価格が動くニュースを見て、すぐ飛びつく人もいれば、静かにデータを確かめてから動く人もいます。</p>
       <p class="body reveal" data-d="2">過去の値動きには、ある程度の“傾向”が残っていることがあります。感覚ではなく、その傾向を手がかりに考える——それが、これからの暗号資産との付き合い方かもしれません。</p>
       <p class="body reveal" data-d="2">このガイドは、その<span class="key">「最初の一歩」</span>を、誰でも踏み出せるようにしたものです。</p>
@@ -292,7 +373,7 @@
 
   <!-- ===== 03 オファー＋登録 ===== -->
   <section id="offer" class="sec">
-    <div class="offer reveal">
+    <div class="offer light reveal">
       <div style="text-align:center">
         <span class="free-badge">無料配布</span>
         <h2><span class="small ink-soft">はじめての方のための</span><span class="metal">暗号資産スタートガイド</span></h2>
@@ -328,7 +409,7 @@
   </section>
 
   <!-- ===== 04 信頼補強 ===== -->
-  <section class="sec" style="text-align:center">
+  <section class="sec bg-deep" style="text-align:center">
     <div class="wrap">
       <div class="eyebrow reveal" style="justify-content:center">DATA, NOT GUESSWORK</div>
       <h2 class="reveal" data-d="1">感覚ではなく、<span class="key">データ</span>で。</h2>
@@ -342,9 +423,9 @@
   </section>
 
   <!-- ===== クロージング ===== -->
-  <section class="closing">
+  <section class="closing bg-glow p-img" style="--bg:url(images/Art-Deco-squere4.webp)">
     <div class="ornament reveal"><i></i></div>
-    <h2 class="reveal" data-d="1">“なんとなく”で買う時代を、<br><span class="metal">静かに終わらせる。</span></h2>
+    <h2 class="reveal" data-d="1">“なんとなく”で買う時代を、<span class="metal">静かに終わらせる。</span></h2>
     <p class="lead reveal" data-d="2" style="margin:0 auto 30px;max-width:24em">その第一歩は、誰かの予想を待つことではなく、自分の「見る目」を持つことから。</p>
     <a class="btn-present reveal" data-d="3" href="#offer" aria-label="無料プレゼントを受け取る">
       <img src="images/hero-sp2button.webp" alt="無料プレゼントを受け取る" onerror="this.closest('.btn-present').classList.add('noimg')">
