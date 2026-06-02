@@ -7,11 +7,15 @@
 <meta name="description" content="銀行とNISAに預けっぱなしのあなたへ。口座開設から購入・送金まで、はじめての方のための無料スタートガイドをお届けします。">
 
 <!--
-  Crypto Nova ｜ リスト取りLP（A案／深緑×ゴールド）
-  画像は images/ 内：
-    images/ms-nova-smaile.webp   （正面・笑顔）  → ファーストビュー
-    images/ms-nova-landscape.webp（少し横）      → 視点セクション
-    images/ms-nova-front.webp    （正面・真顔）  → クロージング
+  Crypto Nova ｜ リスト取りLP（新トンマナ：ネイビー×ゴールド×イエロー／明朝／スマホ幅統一）
+  ■ レイアウト：中央 約500px のスマホ幅カラムで全画面統一。画像はすべて横1080px基準。
+  ■ Hero画像（images/ 内）：
+     images/hero-sp.webp        ヒーロー画像   1080 × 1730
+     images/hero-sp2button.webp プレゼント受取ボタン（再利用） 1080 × 215
+  ■ セクション図版プレースホルダー（任意・後で差し替え／不要なら削除）：
+     images/sec-assets.webp  共感の図   1080 × 1080（正方形）
+     images/sec-steps.webp   3ステップ  1080 × 1350（縦長4:5）
+     images/sec-ai.webp      AI解析の図 1080 × 1080（正方形）
   公開：https://810eigo-droid.github.io/Crypto-Nova2/
   [REPLACE] LINE_URL：公式LINEの友だち追加URLに差し替え
   [REPLACE] フォームの送信先（utage等）：submitEmail() 内
@@ -19,284 +23,287 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --green-deep:#0F2A22;
-    --green-dark:#0A1C16;
-    --green-sub:#2E4636;
-    --gold:#C8A24A;
-    --gold-light:#E3CE9A;
-    --ink:#F4F1E8;
-    --ink-soft:#B9B5A6;
+    /* === 新トンマナ：色 === */
+    --navy:#16233F;          /* ベース（主役） */
+    --navy-2:#1B2A4A;        /* カード等の一段明るいネイビー */
+    --navy-deep:#0F1A30;     /* 余白の地・最暗部 */
+    --yellow:#FFD633;        /* 行動喚起・最重要キーワード */
+    --yellow-hi:#FFE680;
+    --yellow-lo:#E0B200;
+    --gold:#C9A227;          /* 装飾ゴールド（暗） */
+    --gold-hi:#F2E18C;       /* 装飾ゴールド（明） */
+    --gold-mid:#E8C547;
+    --orange:#F0852B;        /* ごく少量のポイント */
+    --white:#FFFFFF;
+    --ink:#EDF1F8;           /* 本文 */
+    --ink-soft:#A9B4C9;      /* 補足 */
     --line-green:#06C755;
-    --maxw:680px;
+    --maxw:500px;
+    --hair:rgba(201,162,39,.45);
+    --hair-soft:rgba(201,162,39,.22);
+    --ease:cubic-bezier(.2,.7,.2,1);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    font-family:"Zen Kaku Gothic New",sans-serif;
-    color:var(--ink);
-    background:var(--green-dark);
-    line-height:1.9;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    font-family:"Shippori Mincho",serif;
+    color:var(--ink);background:var(--navy-deep);
+    line-height:1.95;letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;font-feature-settings:"palt" 1;
   }
+  /* 周辺のうっすらした光 */
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(120% 60% at 50% 0%, #1d2e52 0%, var(--navy-deep) 70%)}
 
-  /* 背景の質感（深緑グラデ＋極細ゴールドグリッド＋粒状ノイズ） */
-  body::before{
-    content:"";position:fixed;inset:0;z-index:-2;
-    background:
-      radial-gradient(120% 80% at 50% 0%, #16382c 0%, var(--green-deep) 45%, var(--green-dark) 100%);
+  /* スマホ幅カラム */
+  .app{
+    position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;min-height:100vh;
+    background:linear-gradient(180deg,var(--navy) 0%, #13203A 100%);
+    box-shadow:0 0 80px rgba(0,0,0,.5);overflow:hidden;
   }
-  body::after{
-    content:"";position:fixed;inset:0;z-index:-1;opacity:.5;
-    background-image:
-      linear-gradient(rgba(200,162,74,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,162,74,.05) 1px, transparent 1px);
-    background-size:64px 64px;
-    -webkit-mask-image:radial-gradient(120% 90% at 50% 10%, #000 30%, transparent 90%);
-            mask-image:radial-gradient(120% 90% at 50% 10%, #000 30%, transparent 90%);
-  }
+  /* 内部の極薄ゴールド・グリッド */
+  .app::before{content:"";position:absolute;inset:0;z-index:0;opacity:.4;pointer-events:none;
+    background-image:linear-gradient(var(--hair-soft) 1px,transparent 1px),linear-gradient(90deg,var(--hair-soft) 1px,transparent 1px);
+    background-size:60px 60px;
+    -webkit-mask-image:radial-gradient(120% 80% at 50% 6%, #000 20%, transparent 88%);
+            mask-image:radial-gradient(120% 80% at 50% 6%, #000 20%, transparent 88%)}
 
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-  section{padding:92px 0;position:relative}
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;
+    background:linear-gradient(90deg,var(--gold-hi),var(--gold),var(--yellow));transition:width .1s linear}
 
-  /* 共通：見出し */
+  .sec{position:relative;z-index:1;padding:64px 24px}
+  .wrap{position:relative;z-index:1}
+
+  /* ===== 見出し・テキスト ===== */
   .eyebrow{
-    font-family:"Cormorant Garamond",serif;
-    font-size:14px;letter-spacing:.32em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:26px;font-weight:600;
+    display:inline-flex;align-items:center;gap:12px;margin-bottom:22px;
+    font-size:12.5px;letter-spacing:.28em;color:var(--gold-mid);font-weight:700;
   }
-  h1,h2{
-    font-family:"Shippori Mincho",serif;font-weight:800;
-    line-height:1.5;letter-spacing:.02em;
+  .eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--gold),var(--gold-hi))}
+
+  h1,h2,h3{font-weight:800;line-height:1.5;letter-spacing:.04em}
+  h2{font-size:clamp(25px,7.4vw,32px);margin-bottom:22px;color:var(--white)}
+  h2 .small{display:block;font-size:.62em;font-weight:700;color:var(--ink-soft);letter-spacing:.06em;margin-bottom:8px}
+
+  /* メタリックゴールド文字（濃淡で立体／ベタ塗り回避） */
+  .metal{
+    background:linear-gradient(176deg,var(--gold-hi) 0%,var(--gold-mid) 38%,var(--gold) 60%,#9c7a1c 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    -webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 1px 0 rgba(0,0,0,.35));
   }
-  h1{font-size:clamp(28px,7vw,44px)}
-  h2{font-size:clamp(23px,5.4vw,32px);margin-bottom:28px}
-  .gold{color:var(--gold-light)}
-  .lead,p.body{color:var(--ink-soft);font-size:clamp(15px,4vw,17px)}
+  /* イエロー強調文字（行動喚起・最重要KW） */
+  .key{
+    background:linear-gradient(176deg,var(--yellow-hi) 0%,var(--yellow) 52%,var(--yellow-lo) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+    font-weight:800;filter:drop-shadow(0 1px 0 rgba(0,0,0,.3));
+  }
+  .lead,p.body{color:var(--ink);font-weight:500;font-size:clamp(15px,4.2vw,16.5px);letter-spacing:.03em}
+  .lead{color:var(--ink)}
   p.body{margin-bottom:18px}
-  p.body strong{color:var(--ink);font-weight:700}
-  .em{
-    color:var(--ink);
-    background:linear-gradient(transparent 60%, rgba(200,162,74,.25) 60%);
-    padding:0 .08em;font-weight:700;
+  p.body strong{color:var(--white);font-weight:700}
+  .ink-soft{color:var(--ink-soft)}
+
+  /* ゴールドの飾り罫＋中央ダイヤ */
+  .ornament{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto 26px;max-width:240px}
+  .ornament::before,.ornament::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+  .ornament::after{background:linear-gradient(90deg,var(--gold),transparent)}
+  .ornament i{width:7px;height:7px;background:linear-gradient(135deg,var(--gold-hi),var(--gold));transform:rotate(45deg);display:block}
+  .rule{width:54px;height:2px;background:linear-gradient(90deg,var(--gold-hi),var(--gold));margin-bottom:24px;border-radius:2px}
+
+  /* オレンジの極小ポイントバッジ */
+  .free-badge{
+    display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;color:#fff;
+    background:linear-gradient(135deg,#ff9a3c,var(--orange));padding:5px 14px;border-radius:2px;
+    box-shadow:0 6px 16px -8px rgba(240,133,43,.8);margin-bottom:16px;
   }
 
-  /* CTAボタン */
-  .cta{
-    display:inline-flex;align-items:center;gap:12px;
-    font-family:"Shippori Mincho",serif;font-weight:700;font-size:17px;
-    color:var(--green-dark);background:linear-gradient(135deg,var(--gold-light),var(--gold));
-    padding:18px 40px;border-radius:2px;text-decoration:none;letter-spacing:.04em;
-    box-shadow:0 14px 34px -14px rgba(200,162,74,.6);
-    transition:transform .25s, box-shadow .25s;border:none;cursor:pointer;
-  }
-  .cta:hover{transform:translateY(-2px);box-shadow:0 20px 40px -14px rgba(200,162,74,.75)}
-  .cta::after{content:"→";font-size:18px}
-  .note{font-size:11.5px;color:var(--ink-soft);margin-top:16px;letter-spacing:.02em}
+  /* ===== 上部の帯（ブランド） ===== */
+  .topband{position:relative;z-index:2;text-align:center;padding:16px 0 14px;
+    background:linear-gradient(180deg,var(--navy-deep),rgba(15,26,48,0));border-bottom:1px solid var(--hair-soft)}
+  .topband .brand{font-weight:800;letter-spacing:.3em;font-size:15px}
+  .topband .brand small{display:block;font-size:9.5px;letter-spacing:.34em;color:var(--ink-soft);font-weight:600;margin-top:3px}
 
-  /* 罫線（ゴールド細線） */
-  .rule{width:54px;height:1px;background:var(--gold);margin:0 0 26px;opacity:.8}
+  /* ===== プレゼント受取ボタン（画像・再利用部品） ===== */
+  .btn-present{display:block;width:100%;max-width:440px;margin:0 auto;position:relative;
+    transition:transform .25s var(--ease),filter .25s}
+  .btn-present img{width:100%;height:auto;display:block;border-radius:8px}
+  .btn-present:hover{transform:translateY(-2px);filter:brightness(1.05)}
+  /* 画像が無いときの代替ボタン */
+  .btn-present .fallback{display:none}
+  .btn-present.noimg img{display:none}
+  .btn-present.noimg .fallback{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    background:linear-gradient(180deg,#22335a,var(--navy));color:var(--white);
+    border:1.5px solid var(--gold);border-radius:8px;padding:20px;font-weight:800;font-size:18px;letter-spacing:.06em;
+    box-shadow:0 14px 30px -16px rgba(0,0,0,.7), inset 0 1px 0 rgba(242,225,140,.25);
+  }
+  .btn-present.noimg .fallback .k{color:var(--yellow)}
+  .btn-present.noimg .fallback::after{content:"▶";color:var(--gold-mid);font-size:14px}
+  .btn-cap{text-align:center;font-size:11.5px;color:var(--ink-soft);margin-top:12px;letter-spacing:.04em}
 
   /* ===== Hero ===== */
-  .hero{padding:64px 0 80px;min-height:96vh;display:flex;align-items:center}
-  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;width:100%}
-  .hero h1{margin-bottom:24px}
-  .hero .lead{margin-bottom:34px;max-width:30em}
-  .nova-hero{position:relative}
-  .nova-hero img{
-    width:100%;border-radius:6px;display:block;
-    box-shadow:0 30px 70px -30px rgba(0,0,0,.8);
-    border:1px solid rgba(200,162,74,.22);
-  }
-  .nova-hero::after{
-    content:"";position:absolute;inset:-1px;border-radius:6px;pointer-events:none;
-    box-shadow:inset 0 0 60px rgba(15,42,34,.7);
-  }
-  .badge-coin{
-    position:absolute;left:-14px;bottom:18px;
-    font-family:"Cormorant Garamond",serif;font-style:italic;
-    font-size:13px;color:var(--gold-light);letter-spacing:.1em;
-    background:rgba(10,28,22,.85);border:1px solid rgba(200,162,74,.35);
-    padding:8px 14px;border-radius:2px;backdrop-filter:blur(4px);
-  }
-  .brand-top{
-    position:absolute;top:30px;left:0;right:0;
-    font-family:"Cormorant Garamond",serif;letter-spacing:.3em;
-    color:var(--gold);font-size:15px;text-align:center;text-transform:uppercase;
-  }
-
-  /* ===== 区切りの一言 ===== */
-  .interlude{text-align:center;padding:64px 0}
-  .interlude p{
-    font-family:"Shippori Mincho",serif;font-size:clamp(18px,5vw,24px);
-    color:var(--gold-light);line-height:1.9;
-  }
-
-  /* ===== 視点セクション（画像＋文章） ===== */
-  .split{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:center}
-  .split img{
-    width:100%;border-radius:6px;display:block;
-    border:1px solid rgba(200,162,74,.2);
-    box-shadow:0 24px 60px -28px rgba(0,0,0,.8);
-  }
+  .hero{position:relative;z-index:1;padding:0 0 44px}
+  .hero-figure{position:relative;width:100%;aspect-ratio:1080/1730;background:linear-gradient(160deg,#1d2e52,var(--navy))}
+  .hero-figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .hero-figure .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:24px}
+  .hero-figure .ph .pf{position:absolute;inset:18px;border:1px dashed var(--hair)}
+  .hero-figure .ph b{color:var(--gold-hi);font-size:17px;letter-spacing:.1em}
+  .hero-figure .ph code{color:var(--gold-mid);font-size:13px;letter-spacing:.1em}
+  .hero-figure .ph small{color:var(--ink-soft);font-size:12px;letter-spacing:.16em}
+  .hero .btn-present{margin-top:30px;padding:0 24px}
+  .hero .btn-cap{padding:0 24px}
 
   /* ===== オファー ===== */
-  .offer{
-    background:linear-gradient(160deg, rgba(46,70,54,.55), rgba(15,42,34,.4));
-    border:1px solid rgba(200,162,74,.28);
-    border-radius:8px;padding:46px 34px;text-align:center;
-    position:relative;overflow:hidden;
-  }
-  .offer::before{
-    content:"FREE";position:absolute;top:16px;right:-32px;
-    background:var(--gold);color:var(--green-dark);
-    font-family:"Cormorant Garamond",serif;font-weight:600;letter-spacing:.2em;
-    transform:rotate(45deg);padding:5px 40px;font-size:13px;
-  }
-  .offer .tag{
-    display:inline-block;font-size:12px;letter-spacing:.2em;color:var(--gold);
-    border:1px solid rgba(200,162,74,.5);border-radius:2px;padding:5px 14px;margin-bottom:20px;
-  }
-  .offer h2{margin-bottom:18px}
-  .checklist{text-align:left;max-width:25em;margin:24px auto 30px;list-style:none}
-  .checklist li{padding:8px 0 8px 30px;position:relative;color:var(--ink-soft);font-size:15px}
-  .checklist li::before{
-    content:"";position:absolute;left:2px;top:14px;width:9px;height:9px;
-    border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);
-    transform:rotate(45deg);
-  }
+  .offer{background:linear-gradient(170deg,var(--navy-2),#13213e);border:1px solid var(--hair);
+    border-radius:10px;padding:34px 22px;position:relative;overflow:hidden}
+  .offer::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-hi),var(--gold))}
+  .offer h2{text-align:center}
+  .checklist{list-style:none;margin:22px 0 6px}
+  .checklist li{position:relative;padding:12px 0 12px 32px;border-top:1px solid var(--hair-soft);color:var(--white);font-weight:600;font-size:15px}
+  .checklist li:first-child{border-top:0}
+  .checklist li::before{content:"";position:absolute;left:3px;top:50%;margin-top:-5px;width:9px;height:9px;
+    border-right:2px solid var(--gold-mid);border-bottom:2px solid var(--gold-mid);transform:rotate(45deg)}
 
   /* ===== 登録フォーム ===== */
-  .form-box{max-width:420px;margin:30px auto 0;text-align:left}
-  .line-btn{
-    display:flex;align-items:center;justify-content:center;gap:10px;
-    background:var(--line-green);color:#fff;font-weight:700;font-size:16px;
-    text-decoration:none;padding:16px;border-radius:4px;transition:filter .2s,transform .2s;
-    font-family:"Zen Kaku Gothic New",sans-serif;
-  }
-  .line-btn:hover{filter:brightness(.95);transform:translateY(-1px)}
+  .form-box{max-width:400px;margin:26px auto 0}
+  .line-btn{display:flex;align-items:center;justify-content:center;gap:11px;
+    background:var(--line-green);color:#fff;font-weight:800;font-size:16px;text-decoration:none;
+    padding:17px;border-radius:8px;transition:filter .2s,transform .2s;letter-spacing:.04em}
+  .line-btn:hover{filter:brightness(.96);transform:translateY(-1px)}
   .line-btn svg{width:21px;height:21px;fill:#fff}
-  .or{display:flex;align-items:center;gap:14px;color:var(--ink-soft);font-size:12px;
-      letter-spacing:.2em;margin:18px 0;font-family:"Cormorant Garamond",serif}
-  .or::before,.or::after{content:"";flex:1;height:1px;background:rgba(200,162,74,.3)}
+  .or{display:flex;align-items:center;gap:14px;color:var(--ink-soft);font-size:12px;letter-spacing:.24em;margin:18px 0;font-weight:700}
+  .or::before,.or::after{content:"";flex:1;height:1px;background:var(--hair-soft)}
   .mailrow{display:flex;flex-direction:column;gap:11px}
-  .mailrow input{
-    padding:15px 16px;border:1px solid rgba(200,162,74,.35);border-radius:4px;
-    background:rgba(10,28,22,.6);color:var(--ink);font-size:15px;font-family:inherit;
-  }
-  .mailrow input::placeholder{color:#7d8a80}
-  .mailrow input:focus{outline:none;border-color:var(--gold)}
-  .mail-sub{
-    background:transparent;border:1px solid var(--gold);color:var(--gold-light);
-    padding:15px;border-radius:4px;font-family:"Shippori Mincho",serif;font-weight:700;
-    font-size:15px;cursor:pointer;transition:background .2s,color .2s;
-  }
-  .mail-sub:hover{background:var(--gold);color:var(--green-dark)}
-  .err{color:#e8a0a0;font-size:12.5px;display:none}
-  .done{display:none;background:rgba(6,199,87,.12);border:1px solid rgba(6,199,87,.4);
-    border-radius:4px;padding:18px;text-align:center;color:var(--ink)}
-  .form-note{font-size:11.5px;color:var(--ink-soft);margin-top:16px;text-align:center;line-height:1.7}
+  .mailrow input{padding:16px;border:1px solid var(--hair);border-radius:8px;background:rgba(15,26,48,.6);
+    color:var(--ink);font-size:15px;font-family:inherit;transition:border-color .2s}
+  .mailrow input::placeholder{color:#7a86a0}
+  .mailrow input:focus{outline:none;border-color:var(--gold-mid)}
+  .mail-sub{background:transparent;border:1.5px solid var(--gold-mid);color:var(--gold-hi);padding:16px;border-radius:8px;
+    font-family:inherit;font-weight:800;font-size:15px;cursor:pointer;letter-spacing:.06em;transition:background .25s,color .25s}
+  .mail-sub:hover{background:var(--gold-mid);color:var(--navy)}
+  .err{color:#ffb0a0;font-size:12.5px;display:none}
+  .done{display:none;background:rgba(6,199,87,.1);border:1px solid rgba(6,199,87,.4);border-radius:8px;padding:18px;text-align:center;color:var(--white)}
+  .form-note{font-size:11.5px;color:var(--ink-soft);margin-top:16px;text-align:center;line-height:1.8}
 
-  /* ===== 信頼補強 ===== */
-  .trust{text-align:center}
-  .trust .wrap{max-width:560px}
+  /* ===== セクション図版（プレースホルダー対応） ===== */
+  .figure{position:relative;width:100%;border:1px solid var(--hair-soft);border-radius:10px;overflow:hidden;background:var(--navy-2);margin:6px 0 4px}
+  .figure.sq{aspect-ratio:1/1}
+  .figure.tall{aspect-ratio:1080/1350}
+  .figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .figure .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;padding:20px}
+  .figure .ph .pf{position:absolute;inset:16px;border:1px dashed var(--hair)}
+  .figure .ph b{color:var(--gold-hi);font-size:15px;letter-spacing:.08em}
+  .figure .ph code{color:var(--gold-mid);font-size:12.5px}
+  .figure .ph small{color:var(--ink-soft);font-size:11.5px;letter-spacing:.14em}
+
+  /* ===== 区切りの一言 ===== */
+  .interlude{text-align:center;padding:54px 24px}
+  .interlude p{font-size:clamp(19px,5.6vw,24px);font-weight:700;line-height:1.95;color:var(--white)}
 
   /* ===== クロージング ===== */
-  .closing{text-align:center;padding:96px 0}
-  .closing .nova-front{
-    width:160px;height:160px;object-fit:cover;border-radius:50%;
-    border:1px solid rgba(200,162,74,.4);margin:0 auto 34px;display:block;
-    box-shadow:0 20px 50px -20px rgba(0,0,0,.8);
-  }
-  .closing h2{font-size:clamp(25px,6vw,38px);margin-bottom:20px}
+  .closing{text-align:center;padding:72px 24px 84px}
+  .closing h2{font-size:clamp(26px,7.6vw,34px)}
 
   /* ===== フッター ===== */
-  footer{background:var(--green-dark);border-top:1px solid rgba(200,162,74,.18);padding:46px 0 60px}
-  .footer-brand{font-family:"Cormorant Garamond",serif;letter-spacing:.3em;color:var(--gold);
-    text-align:center;font-size:16px;margin-bottom:22px;text-transform:uppercase}
-  .disclaimer{font-size:11px;color:#7d8a80;line-height:1.85;list-style:none}
+  footer{position:relative;z-index:1;background:var(--navy-deep);border-top:1px solid var(--hair-soft);padding:40px 24px 56px}
+  .footer-brand{text-align:center;font-weight:800;letter-spacing:.3em;color:var(--gold-mid);font-size:15px;margin-bottom:20px}
+  .disclaimer{font-size:11px;color:#7a86a0;line-height:1.9;list-style:none}
   .disclaimer li{margin-bottom:5px;padding-left:1em;text-indent:-1em}
 
   /* スクロール演出 */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity 1s ease, transform 1s ease}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
   .reveal.in{opacity:1;transform:none}
+  .reveal[data-d="1"]{transition-delay:.1s}
+  .reveal[data-d="2"]{transition-delay:.22s}
+  .reveal[data-d="3"]{transition-delay:.34s}
 
-  /* レスポンシブ */
-  @media(max-width:600px){
-    section{padding:68px 0}
-    .hero{padding:30px 0 50px;min-height:auto}
-    .hero-grid{grid-template-columns:1fr;gap:30px}
-    .nova-hero{order:-1;max-width:300px;margin:0 auto}
-    .split{grid-template-columns:1fr;gap:24px}
-    .split img{max-width:280px;margin:0 auto}
-    .offer{padding:38px 22px}
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
   }
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
 
-<!-- ===== Hero ===== -->
-<section class="hero">
-  <div class="wrap">
-    <div class="brand-top">Crypto Nova</div>
-    <div class="hero-grid">
-      <div class="reveal">
-        <div class="eyebrow">For those who keep it all in the bank</div>
-        <h1>資産を、銀行とNISAに<br><span class="gold">“預けっぱなし”</span>の<br>あなたへ。</h1>
-        <p class="lead">それは堅実です。でも、それ“だけ”だと、世の中で静かに動いているものが、見えなくなる。——まずは「知る」ところから。はじめての方向けの無料ガイドをどうぞ。</p>
-        <a href="#offer" class="cta">無料ガイドを受け取る</a>
-        <p class="note">※情報提供を目的とした内容です。投資助言・売買推奨ではありません。</p>
+<div class="app">
+
+  <!-- 上部の帯 -->
+  <div class="topband">
+    <div class="brand metal">CRYPTO NOVA<small>知的フィンテックの、静かな一歩</small></div>
+  </div>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="hero-figure">
+      <div class="ph" aria-hidden="true">
+        <span class="pf"></span>
+        <b>Hero ビジュアル</b>
+        <code>images/hero-sp.webp</code>
+        <small>1080 × 1730</small>
       </div>
-      <div class="nova-hero reveal">
-        <img src="images/ms-nova-smaile.webp" alt="Crypto Nova イメージキャラクター ノヴァ">
-        <span class="badge-coin">AI × Market Data</span>
-      </div>
+      <img src="images/hero-sp.webp" alt="はじめての暗号資産ガイド｜Crypto Nova" onerror="this.style.display='none'">
     </div>
-  </div>
-</section>
 
-<!-- ===== 共感 ===== -->
-<section>
-  <div class="wrap reveal">
-    <div class="rule"></div>
-    <h2>「興味はある。でも、よく分からない」<br>——そのまま、何年が過ぎたでしょうか。</h2>
-    <p class="body">ニュースで「ビットコインが最高値」と聞くたび、少し気になる。でも、怪しい話に巻き込まれたくないし、損もしたくない。だから結局、銀行とNISAのまま、見送ってきた。</p>
-    <p class="body">その慎重さは、間違っていません。ただ——「分からないから」と「やらない」の間で止まっているなら、<strong>足りないのは勇気ではなく、“判断するための材料”</strong>かもしれません。</p>
-  </div>
-</section>
+    <a class="btn-present" href="#offer" aria-label="無料プレゼントを受け取る">
+      <img src="images/hero-sp2button.webp" alt="無料プレゼントを受け取る" onerror="this.closest('.btn-present').classList.add('noimg')">
+      <span class="fallback"><span class="k">無料プレゼント</span>を受け取る</span>
+    </a>
+    <p class="btn-cap">※情報提供を目的とした内容です。投資助言・売買推奨ではありません。</p>
+  </section>
 
-<!-- ===== 区切りの一言 ===== -->
-<div class="interlude wrap reveal">
-  <p>同じニュースを見ても、<br>動く人と、見送る人がいる。</p>
-</div>
-
-<!-- ===== 視点（画像＋文章） ===== -->
-<section>
-  <div class="wrap">
-    <div class="split">
-      <img class="reveal" src="images/ms-nova-landscape.webp" alt="ノヴァ">
-      <div class="reveal">
-        <div class="eyebrow">A quiet way to begin</div>
-        <h2>「なんとなく」で買わない人は、<br>何を見ているのか。</h2>
-        <p class="body">価格が動くニュースを見て、すぐ飛びつく人もいれば、静かにデータを確かめてから動く人もいます。</p>
-        <p class="body">過去の値動きには、ある程度の“傾向”が残っていることがあります。感覚ではなく、その傾向を手がかりに考える——それが、これからの暗号資産との付き合い方かもしれません。</p>
-        <p class="body">このガイドは、その<span class="em">「最初の一歩」</span>を、誰でも踏み出せるようにしたものです。</p>
+  <!-- ===== 01 共感 ===== -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="rule reveal"></div>
+      <h2 class="reveal" data-d="1">「興味はある。でも、よく分からない」<br>——そのまま、何年が過ぎたでしょうか。</h2>
+      <div class="figure sq reveal" data-d="1">
+        <div class="ph" aria-hidden="true"><span class="pf"></span><b>共感の図（任意）</b><code>images/sec-assets.webp</code><small>1080 × 1080</small></div>
+        <img src="images/sec-assets.webp" alt="" onerror="this.closest('.figure').style.display='none'">
       </div>
+      <p class="body reveal" data-d="2">ニュースで「ビットコインが最高値」と聞くたび、少し気になる。でも、怪しい話に巻き込まれたくないし、損もしたくない。だから結局、銀行とNISAのまま、見送ってきた。</p>
+      <p class="body reveal" data-d="2">その慎重さは、間違っていません。ただ——「分からないから」と「やらない」の間で止まっているなら、<strong>足りないのは勇気ではなく、<span class="key">“判断するための材料”</span></strong>かもしれません。</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== オファー＋登録 ===== -->
-<section id="offer">
-  <div class="wrap reveal">
-    <div class="offer">
-      <span class="tag">無料配布</span>
-      <h2>はじめての方のための<br><span class="gold">暗号資産スタートガイド</span></h2>
+  <!-- ===== 区切りの一言 ===== -->
+  <div class="interlude">
+    <div class="ornament reveal"><i></i></div>
+    <p class="reveal" data-d="1">同じニュースを見ても、<br>動く人と、見送る人がいる。</p>
+    <div class="ornament reveal" style="margin-top:26px"><i></i></div>
+  </div>
+
+  <!-- ===== 02 視点 ===== -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="eyebrow reveal">A QUIET WAY TO BEGIN</div>
+      <h2 class="reveal" data-d="1">「なんとなく」で買わない人は、<br>何を見ているのか。</h2>
+      <p class="body reveal" data-d="2">価格が動くニュースを見て、すぐ飛びつく人もいれば、静かにデータを確かめてから動く人もいます。</p>
+      <p class="body reveal" data-d="2">過去の値動きには、ある程度の“傾向”が残っていることがあります。感覚ではなく、その傾向を手がかりに考える——それが、これからの暗号資産との付き合い方かもしれません。</p>
+      <p class="body reveal" data-d="2">このガイドは、その<span class="key">「最初の一歩」</span>を、誰でも踏み出せるようにしたものです。</p>
+    </div>
+  </section>
+
+  <!-- ===== 03 オファー＋登録 ===== -->
+  <section id="offer" class="sec">
+    <div class="offer reveal">
+      <div style="text-align:center">
+        <span class="free-badge">無料配布</span>
+        <h2><span class="small ink-soft">はじめての方のための</span><span class="metal">暗号資産スタートガイド</span></h2>
+      </div>
       <p class="body">「興味はあるけど、何から始めればいいか分からない」——そんな方のために、口座開設から、実際に買って、送る・換金するまでの手順を、画面つきで一つずつ解説した入門ガイドです。専門用語や難しい話は抜き。<strong>最初のつまずきポイントだけを、迷わないように整理</strong>しました。</p>
+
+      <div class="figure tall reveal">
+        <div class="ph" aria-hidden="true"><span class="pf"></span><b>3ステップ図（任意）</b><code>images/sec-steps.webp</code><small>1080 × 1350</small></div>
+        <img src="images/sec-steps.webp" alt="口座開設→購入→送金・換金の3ステップ" onerror="this.closest('.figure').style.display='none'">
+      </div>
+
       <ul class="checklist">
         <li>銀行やNISAの“次”を、そろそろ知っておきたい</li>
         <li>興味はあるが、何から手をつけていいか分からない</li>
@@ -318,58 +325,66 @@
         <p class="form-note">※登録は無料です。不要になればいつでも解除できます。<br>※情報提供を目的とした内容で、投資助言・売買推奨・利益保証ではありません。</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== 信頼補強 ===== -->
-<section class="trust">
-  <div class="wrap reveal">
-    <div class="eyebrow" style="text-align:center">Data, not guesswork</div>
-    <h2>感覚ではなく、データで。</h2>
-    <p class="body">Crypto Novaは、過去のトレンドデータをAIで解析する、暗号資産市場のデータ分析ソフトです。売買や価格予測を行うものではなく、“市場を見るための視点”を提供します。</p>
-    <p class="body">まずはこの無料のガイドで、その「最初の一歩」に触れてみてください。</p>
-  </div>
-</section>
+  <!-- ===== 04 信頼補強 ===== -->
+  <section class="sec" style="text-align:center">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="justify-content:center">DATA, NOT GUESSWORK</div>
+      <h2 class="reveal" data-d="1">感覚ではなく、<span class="key">データ</span>で。</h2>
+      <div class="figure sq reveal" data-d="1" style="max-width:360px;margin:6px auto 18px">
+        <div class="ph" aria-hidden="true"><span class="pf"></span><b>AI解析の図（任意）</b><code>images/sec-ai.webp</code><small>1080 × 1080</small></div>
+        <img src="images/sec-ai.webp" alt="AIによる市場データ解析のイメージ" onerror="this.closest('.figure').style.display='none'">
+      </div>
+      <p class="body reveal" data-d="2">Crypto Novaは、過去のトレンドデータをAIで解析する、暗号資産市場のデータ分析ソフトです。売買や価格予測を行うものではなく、“市場を見るための視点”を提供します。</p>
+      <p class="body reveal" data-d="2">まずはこの無料のガイドで、その「最初の一歩」に触れてみてください。</p>
+    </div>
+  </section>
 
-<!-- ===== クロージング ===== -->
-<section class="closing">
-  <div class="wrap reveal">
-    <img class="nova-front" src="images/ms-nova-front.webp" alt="ノヴァ">
-    <h2>“なんとなく”で買う時代を、<br>静かに終わらせる。</h2>
-    <p class="lead" style="max-width:26em;margin:0 auto 34px">その第一歩は、誰かの予想を待つことではなく、自分の「見る目」を持つことから。</p>
-    <a href="#offer" class="cta">無料ガイドを受け取る</a>
-  </div>
-</section>
+  <!-- ===== クロージング ===== -->
+  <section class="closing">
+    <div class="ornament reveal"><i></i></div>
+    <h2 class="reveal" data-d="1">“なんとなく”で買う時代を、<br><span class="metal">静かに終わらせる。</span></h2>
+    <p class="lead reveal" data-d="2" style="margin:0 auto 30px;max-width:24em">その第一歩は、誰かの予想を待つことではなく、自分の「見る目」を持つことから。</p>
+    <a class="btn-present reveal" data-d="3" href="#offer" aria-label="無料プレゼントを受け取る">
+      <img src="images/hero-sp2button.webp" alt="無料プレゼントを受け取る" onerror="this.closest('.btn-present').classList.add('noimg')">
+      <span class="fallback"><span class="k">無料プレゼント</span>を受け取る</span>
+    </a>
+  </section>
 
-<!-- ===== フッター ===== -->
-<footer>
-  <div class="wrap">
-    <div class="footer-brand">Crypto Nova</div>
+  <!-- ===== フッター ===== -->
+  <footer>
+    <div class="footer-brand">CRYPTO NOVA</div>
     <ul class="disclaimer">
       <li>・本コンテンツおよびCrypto Novaは、仮想通貨市場に関する情報提供を目的としたものです。</li>
       <li>・投資助言、特定銘柄の売買推奨、利益保証を行うものではありません。</li>
       <li>・Crypto Novaは過去データに基づく市場データ分析ソフトであり、暗号資産の交換業・取引・ウォレット・投資助言の機能を有しません。</li>
       <li>・暗号資産には価格変動リスクがあります。投資判断はご自身の責任で行ってください。</li>
     </ul>
-  </div>
-</footer>
+  </footer>
+
+</div><!-- /.app -->
 
 <script>
   // [REPLACE] 公式LINEの友だち追加URL
   var LINE_URL = "https://lin.ee/XXXXXXX";
   document.getElementById('lineBtn').href = LINE_URL;
 
+  // スクロール進捗
+  var prog = document.getElementById('progress');
+  function onScroll(){var h=document.documentElement;var max=h.scrollHeight-h.clientHeight;
+    prog.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  document.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
   // スクロール演出
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {threshold:.15});
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
   // メール登録（フロントのみ。本番は送信先を実装）
   function submitEmail(){
-    var v = (document.getElementById('email').value || '').trim();
-    var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    if(!ok){ document.getElementById('err').style.display='block'; return; }
+    var v=(document.getElementById('email').value||'').trim();
+    var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    if(!ok){document.getElementById('err').style.display='block';return;}
     document.getElementById('err').style.display='none';
     // [REPLACE] ここで utage 等のフォーム送信先へ v を送る
     document.getElementById('mailrow').style.display='none';

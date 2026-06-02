@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>はじめての暗号資産ガイド（無料）｜Crypto Nova</title>
+<meta name="description" content="銀行とNISAに預けっぱなしのあなたへ。口座開設から購入・送金まで、はじめての方のための無料スタートガイドをお届けします。">
+
+<!--
+  Crypto Nova ｜ リスト取りLP（A案／深緑×ゴールド）
+  画像は images/ 内：
+    images/ms-nova-smaile.webp   （正面・笑顔）  → ファーストビュー
+    images/ms-nova-landscape.webp（少し横）      → 視点セクション
+    images/ms-nova-front.webp    （正面・真顔）  → クロージング
+  公開：https://810eigo-droid.github.io/Crypto-Nova2/
+  [REPLACE] LINE_URL：公式LINEの友だち追加URLに差し替え
+  [REPLACE] フォームの送信先（utage等）：submitEmail() 内
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --green-deep:#0F2A22;
+    --green-dark:#0A1C16;
+    --green-sub:#2E4636;
+    --gold:#C8A24A;
+    --gold-light:#E3CE9A;
+    --ink:#F4F1E8;
+    --ink-soft:#B9B5A6;
+    --line-green:#06C755;
+    --maxw:680px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    color:var(--ink);
+    background:var(--green-dark);
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* 背景の質感（深緑グラデ＋極細ゴールドグリッド＋粒状ノイズ） */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(120% 80% at 50% 0%, #16382c 0%, var(--green-deep) 45%, var(--green-dark) 100%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;opacity:.5;
+    background-image:
+      linear-gradient(rgba(200,162,74,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,162,74,.05) 1px, transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(120% 90% at 50% 10%, #000 30%, transparent 90%);
+            mask-image:radial-gradient(120% 90% at 50% 10%, #000 30%, transparent 90%);
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  section{padding:92px 0;position:relative}
+
+  /* 共通：見出し */
+  .eyebrow{
+    font-family:"Cormorant Garamond",serif;
+    font-size:14px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:26px;font-weight:600;
+  }
+  h1,h2{
+    font-family:"Shippori Mincho",serif;font-weight:800;
+    line-height:1.5;letter-spacing:.02em;
+  }
+  h1{font-size:clamp(28px,7vw,44px)}
+  h2{font-size:clamp(23px,5.4vw,32px);margin-bottom:28px}
+  .gold{color:var(--gold-light)}
+  .lead,p.body{color:var(--ink-soft);font-size:clamp(15px,4vw,17px)}
+  p.body{margin-bottom:18px}
+  p.body strong{color:var(--ink);font-weight:700}
+  .em{
+    color:var(--ink);
+    background:linear-gradient(transparent 60%, rgba(200,162,74,.25) 60%);
+    padding:0 .08em;font-weight:700;
+  }
+
+  /* CTAボタン */
+  .cta{
+    display:inline-flex;align-items:center;gap:12px;
+    font-family:"Shippori Mincho",serif;font-weight:700;font-size:17px;
+    color:var(--green-dark);background:linear-gradient(135deg,var(--gold-light),var(--gold));
+    padding:18px 40px;border-radius:2px;text-decoration:none;letter-spacing:.04em;
+    box-shadow:0 14px 34px -14px rgba(200,162,74,.6);
+    transition:transform .25s, box-shadow .25s;border:none;cursor:pointer;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 20px 40px -14px rgba(200,162,74,.75)}
+  .cta::after{content:"→";font-size:18px}
+  .note{font-size:11.5px;color:var(--ink-soft);margin-top:16px;letter-spacing:.02em}
+
+  /* 罫線（ゴールド細線） */
+  .rule{width:54px;height:1px;background:var(--gold);margin:0 0 26px;opacity:.8}
+
+  /* ===== Hero ===== */
+  .hero{padding:64px 0 80px;min-height:96vh;display:flex;align-items:center}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;width:100%}
+  .hero h1{margin-bottom:24px}
+  .hero .lead{margin-bottom:34px;max-width:30em}
+  .nova-hero{position:relative}
+  .nova-hero img{
+    width:100%;border-radius:6px;display:block;
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.8);
+    border:1px solid rgba(200,162,74,.22);
+  }
+  .nova-hero::after{
+    content:"";position:absolute;inset:-1px;border-radius:6px;pointer-events:none;
+    box-shadow:inset 0 0 60px rgba(15,42,34,.7);
+  }
+  .badge-coin{
+    position:absolute;left:-14px;bottom:18px;
+    font-family:"Cormorant Garamond",serif;font-style:italic;
+    font-size:13px;color:var(--gold-light);letter-spacing:.1em;
+    background:rgba(10,28,22,.85);border:1px solid rgba(200,162,74,.35);
+    padding:8px 14px;border-radius:2px;backdrop-filter:blur(4px);
+  }
+  .brand-top{
+    position:absolute;top:30px;left:0;right:0;
+    font-family:"Cormorant Garamond",serif;letter-spacing:.3em;
+    color:var(--gold);font-size:15px;text-align:center;text-transform:uppercase;
+  }
+
+  /* ===== 区切りの一言 ===== */
+  .interlude{text-align:center;padding:64px 0}
+  .interlude p{
+    font-family:"Shippori Mincho",serif;font-size:clamp(18px,5vw,24px);
+    color:var(--gold-light);line-height:1.9;
+  }
+
+  /* ===== 視点セクション（画像＋文章） ===== */
+  .split{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:center}
+  .split img{
+    width:100%;border-radius:6px;display:block;
+    border:1px solid rgba(200,162,74,.2);
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.8);
+  }
+
+  /* ===== オファー ===== */
+  .offer{
+    background:linear-gradient(160deg, rgba(46,70,54,.55), rgba(15,42,34,.4));
+    border:1px solid rgba(200,162,74,.28);
+    border-radius:8px;padding:46px 34px;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .offer::before{
+    content:"FREE";position:absolute;top:16px;right:-32px;
+    background:var(--gold);color:var(--green-dark);
+    font-family:"Cormorant Garamond",serif;font-weight:600;letter-spacing:.2em;
+    transform:rotate(45deg);padding:5px 40px;font-size:13px;
+  }
+  .offer .tag{
+    display:inline-block;font-size:12px;letter-spacing:.2em;color:var(--gold);
+    border:1px solid rgba(200,162,74,.5);border-radius:2px;padding:5px 14px;margin-bottom:20px;
+  }
+  .offer h2{margin-bottom:18px}
+  .checklist{text-align:left;max-width:25em;margin:24px auto 30px;list-style:none}
+  .checklist li{padding:8px 0 8px 30px;position:relative;color:var(--ink-soft);font-size:15px}
+  .checklist li::before{
+    content:"";position:absolute;left:2px;top:14px;width:9px;height:9px;
+    border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);
+    transform:rotate(45deg);
+  }
+
+  /* ===== 登録フォーム ===== */
+  .form-box{max-width:420px;margin:30px auto 0;text-align:left}
+  .line-btn{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    background:var(--line-green);color:#fff;font-weight:700;font-size:16px;
+    text-decoration:none;padding:16px;border-radius:4px;transition:filter .2s,transform .2s;
+    font-family:"Zen Kaku Gothic New",sans-serif;
+  }
+  .line-btn:hover{filter:brightness(.95);transform:translateY(-1px)}
+  .line-btn svg{width:21px;height:21px;fill:#fff}
+  .or{display:flex;align-items:center;gap:14px;color:var(--ink-soft);font-size:12px;
+      letter-spacing:.2em;margin:18px 0;font-family:"Cormorant Garamond",serif}
+  .or::before,.or::after{content:"";flex:1;height:1px;background:rgba(200,162,74,.3)}
+  .mailrow{display:flex;flex-direction:column;gap:11px}
+  .mailrow input{
+    padding:15px 16px;border:1px solid rgba(200,162,74,.35);border-radius:4px;
+    background:rgba(10,28,22,.6);color:var(--ink);font-size:15px;font-family:inherit;
+  }
+  .mailrow input::placeholder{color:#7d8a80}
+  .mailrow input:focus{outline:none;border-color:var(--gold)}
+  .mail-sub{
+    background:transparent;border:1px solid var(--gold);color:var(--gold-light);
+    padding:15px;border-radius:4px;font-family:"Shippori Mincho",serif;font-weight:700;
+    font-size:15px;cursor:pointer;transition:background .2s,color .2s;
+  }
+  .mail-sub:hover{background:var(--gold);color:var(--green-dark)}
+  .err{color:#e8a0a0;font-size:12.5px;display:none}
+  .done{display:none;background:rgba(6,199,87,.12);border:1px solid rgba(6,199,87,.4);
+    border-radius:4px;padding:18px;text-align:center;color:var(--ink)}
+  .form-note{font-size:11.5px;color:var(--ink-soft);margin-top:16px;text-align:center;line-height:1.7}
+
+  /* ===== 信頼補強 ===== */
+  .trust{text-align:center}
+  .trust .wrap{max-width:560px}
+
+  /* ===== クロージング ===== */
+  .closing{text-align:center;padding:96px 0}
+  .closing .nova-front{
+    width:160px;height:160px;object-fit:cover;border-radius:50%;
+    border:1px solid rgba(200,162,74,.4);margin:0 auto 34px;display:block;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,.8);
+  }
+  .closing h2{font-size:clamp(25px,6vw,38px);margin-bottom:20px}
+
+  /* ===== フッター ===== */
+  footer{background:var(--green-dark);border-top:1px solid rgba(200,162,74,.18);padding:46px 0 60px}
+  .footer-brand{font-family:"Cormorant Garamond",serif;letter-spacing:.3em;color:var(--gold);
+    text-align:center;font-size:16px;margin-bottom:22px;text-transform:uppercase}
+  .disclaimer{font-size:11px;color:#7d8a80;line-height:1.85;list-style:none}
+  .disclaimer li{margin-bottom:5px;padding-left:1em;text-indent:-1em}
+
+  /* スクロール演出 */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity 1s ease, transform 1s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* レスポンシブ */
+  @media(max-width:600px){
+    section{padding:68px 0}
+    .hero{padding:30px 0 50px;min-height:auto}
+    .hero-grid{grid-template-columns:1fr;gap:30px}
+    .nova-hero{order:-1;max-width:300px;margin:0 auto}
+    .split{grid-template-columns:1fr;gap:24px}
+    .split img{max-width:280px;margin:0 auto}
+    .offer{padding:38px 22px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="brand-top">Crypto Nova</div>
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="eyebrow">For those who keep it all in the bank</div>
+        <h1>資産を、銀行とNISAに<br><span class="gold">“預けっぱなし”</span>の<br>あなたへ。</h1>
+        <p class="lead">それは堅実です。でも、それ“だけ”だと、世の中で静かに動いているものが、見えなくなる。——まずは「知る」ところから。はじめての方向けの無料ガイドをどうぞ。</p>
+        <a href="#offer" class="cta">無料ガイドを受け取る</a>
+        <p class="note">※情報提供を目的とした内容です。投資助言・売買推奨ではありません。</p>
+      </div>
+      <div class="nova-hero reveal">
+        <img src="images/ms-nova-smaile.webp" alt="Crypto Nova イメージキャラクター ノヴァ">
+        <span class="badge-coin">AI × Market Data</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 共感 ===== -->
+<section>
+  <div class="wrap reveal">
+    <div class="rule"></div>
+    <h2>「興味はある。でも、よく分からない」<br>——そのまま、何年が過ぎたでしょうか。</h2>
+    <p class="body">ニュースで「ビットコインが最高値」と聞くたび、少し気になる。でも、怪しい話に巻き込まれたくないし、損もしたくない。だから結局、銀行とNISAのまま、見送ってきた。</p>
+    <p class="body">その慎重さは、間違っていません。ただ——「分からないから」と「やらない」の間で止まっているなら、<strong>足りないのは勇気ではなく、“判断するための材料”</strong>かもしれません。</p>
+  </div>
+</section>
+
+<!-- ===== 区切りの一言 ===== -->
+<div class="interlude wrap reveal">
+  <p>同じニュースを見ても、<br>動く人と、見送る人がいる。</p>
+</div>
+
+<!-- ===== 視点（画像＋文章） ===== -->
+<section>
+  <div class="wrap">
+    <div class="split">
+      <img class="reveal" src="images/ms-nova-landscape.webp" alt="ノヴァ">
+      <div class="reveal">
+        <div class="eyebrow">A quiet way to begin</div>
+        <h2>「なんとなく」で買わない人は、<br>何を見ているのか。</h2>
+        <p class="body">価格が動くニュースを見て、すぐ飛びつく人もいれば、静かにデータを確かめてから動く人もいます。</p>
+        <p class="body">過去の値動きには、ある程度の“傾向”が残っていることがあります。感覚ではなく、その傾向を手がかりに考える——それが、これからの暗号資産との付き合い方かもしれません。</p>
+        <p class="body">このガイドは、その<span class="em">「最初の一歩」</span>を、誰でも踏み出せるようにしたものです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== オファー＋登録 ===== -->
+<section id="offer">
+  <div class="wrap reveal">
+    <div class="offer">
+      <span class="tag">無料配布</span>
+      <h2>はじめての方のための<br><span class="gold">暗号資産スタートガイド</span></h2>
+      <p class="body">「興味はあるけど、何から始めればいいか分からない」——そんな方のために、口座開設から、実際に買って、送る・換金するまでの手順を、画面つきで一つずつ解説した入門ガイドです。専門用語や難しい話は抜き。<strong>最初のつまずきポイントだけを、迷わないように整理</strong>しました。</p>
+      <ul class="checklist">
+        <li>銀行やNISAの“次”を、そろそろ知っておきたい</li>
+        <li>興味はあるが、何から手をつけていいか分からない</li>
+        <li>怪しい話ではなく、まず基本の手順だけ知りたい</li>
+      </ul>
+
+      <div class="form-box">
+        <a class="line-btn" href="#" id="lineBtn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.32.07.77.21.88.49.1.25.07.64.03.9l-.14.85c-.04.25-.2.99.86.54 1.07-.45 5.74-3.38 7.83-5.79C21.36 13.5 22 11.9 22 10.13 22 5.64 17.52 2 12 2z"/></svg>
+          LINEでガイドを受け取る
+        </a>
+        <div class="or">OR</div>
+        <div class="mailrow" id="mailrow">
+          <input type="email" id="email" placeholder="メールアドレスを入力" autocomplete="email">
+          <div class="err" id="err">メールアドレスの形式をご確認ください。</div>
+          <button class="mail-sub" type="button" onclick="submitEmail()">メールで受け取る</button>
+        </div>
+        <div class="done" id="done">ご登録ありがとうございます。<br>ガイドをお送りします。</div>
+        <p class="form-note">※登録は無料です。不要になればいつでも解除できます。<br>※情報提供を目的とした内容で、投資助言・売買推奨・利益保証ではありません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 信頼補強 ===== -->
+<section class="trust">
+  <div class="wrap reveal">
+    <div class="eyebrow" style="text-align:center">Data, not guesswork</div>
+    <h2>感覚ではなく、データで。</h2>
+    <p class="body">Crypto Novaは、過去のトレンドデータをAIで解析する、暗号資産市場のデータ分析ソフトです。売買や価格予測を行うものではなく、“市場を見るための視点”を提供します。</p>
+    <p class="body">まずはこの無料のガイドで、その「最初の一歩」に触れてみてください。</p>
+  </div>
+</section>
+
+<!-- ===== クロージング ===== -->
+<section class="closing">
+  <div class="wrap reveal">
+    <img class="nova-front" src="images/ms-nova-front.webp" alt="ノヴァ">
+    <h2>“なんとなく”で買う時代を、<br>静かに終わらせる。</h2>
+    <p class="lead" style="max-width:26em;margin:0 auto 34px">その第一歩は、誰かの予想を待つことではなく、自分の「見る目」を持つことから。</p>
+    <a href="#offer" class="cta">無料ガイドを受け取る</a>
+  </div>
+</section>
+
+<!-- ===== フッター ===== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">Crypto Nova</div>
+    <ul class="disclaimer">
+      <li>・本コンテンツおよびCrypto Novaは、仮想通貨市場に関する情報提供を目的としたものです。</li>
+      <li>・投資助言、特定銘柄の売買推奨、利益保証を行うものではありません。</li>
+      <li>・Crypto Novaは過去データに基づく市場データ分析ソフトであり、暗号資産の交換業・取引・ウォレット・投資助言の機能を有しません。</li>
+      <li>・暗号資産には価格変動リスクがあります。投資判断はご自身の責任で行ってください。</li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // [REPLACE] 公式LINEの友だち追加URL
+  var LINE_URL = "https://lin.ee/XXXXXXX";
+  document.getElementById('lineBtn').href = LINE_URL;
+
+  // スクロール演出
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // メール登録（フロントのみ。本番は送信先を実装）
+  function submitEmail(){
+    var v = (document.getElementById('email').value || '').trim();
+    var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    if(!ok){ document.getElementById('err').style.display='block'; return; }
+    document.getElementById('err').style.display='none';
+    // [REPLACE] ここで utage 等のフォーム送信先へ v を送る
+    document.getElementById('mailrow').style.display='none';
+    document.getElementById('done').style.display='block';
+  }
+</script>
+</body>
+</html>
