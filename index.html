@@ -526,7 +526,7 @@
 <!-- フローティングバー（常時CTA） -->
 <div class="floatbar" id="floatbar">
   <a class="btn-present" href="#offer" aria-label="無料プレゼントを受け取る">
-    <img src="images/hero-sp2-2button.webp" alt="無料プレゼントを受け取る" onerror="this.closest('.btn-present').classList.add('noimg')">
+    <img src="images/hero-sp2button.webp" alt="無料プレゼントを受け取る" onerror="this.closest('.btn-present').classList.add('noimg')">
     <span class="fallback"><span class="k">無料プレゼント</span>を受け取る</span>
   </a>
 </div>
@@ -557,16 +557,15 @@
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16,rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-  // メール登録（フロントのみ。本番は送信先を実装）
+  // メール登録 → サンクスページへ遷移
   function submitEmail(){
     var v=(document.getElementById('email').value||'').trim();
     var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
     if(!ok){document.getElementById('err').style.display='block';return;}
     document.getElementById('err').style.display='none';
-    // [REPLACE] ここで utage 等へ v を送信し、サンクスページへ遷移させる
-    //   例) location.href = "thanks.html";  // サンクスページで公式LINEへ誘導→プレゼント
-    document.getElementById('mailrow').style.display='none';
-    document.getElementById('done').style.display='block';
+    // [REPLACE] ここで utage 等へ v（メールアドレス）を送信する処理を実装
+    // 送信完了後、サンクスページへ遷移（サンクスページで公式LINEへ誘導→プレゼント）
+    window.location.href = "thanks.html";
   }
 </script>
 </body>

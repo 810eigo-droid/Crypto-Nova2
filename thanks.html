@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ご登録ありがとうございます｜Crypto Nova</title>
+<meta name="description" content="メールアドレスのご登録ありがとうございます。無料ガイドの受け取りは、公式LINEの友だち追加であと1ステップです。">
+
+<!--
+  Crypto Nova ｜ サンクスページ（メール登録後の遷移先）
+  役割：登録完了の安心 → 公式LINE友だち追加 → プレゼント（無料ガイド）受け取り
+  [REPLACE] LINE_URL：公式LINEの友だち追加URLに差し替え（下部 <script> 内）
+  ※任意：images/thanks-visual.webp（1080×600前後）を置くと上部ビジュアルが表示されます。
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy:#16233F;--navy-2:#1B2A4A;--navy-deep:#0F1A30;
+    --yellow:#FFD633;--yellow-hi:#FFE680;--yellow-lo:#E0B200;
+    --gold:#C9A227;--gold-hi:#F2E18C;--gold-mid:#E8C547;--orange:#F0852B;
+    --white:#FFFFFF;--ink:#EDF1F8;--ink-soft:#A9B4C9;--line-green:#06C755;
+    --maxw:500px;--hair:rgba(201,162,39,.45);--hair-soft:rgba(201,162,39,.22);
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:"Shippori Mincho",serif;color:var(--ink);background:var(--navy-deep);
+    line-height:1.95;letter-spacing:.02em;-webkit-font-smoothing:antialiased;font-feature-settings:"palt" 1}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(120% 60% at 50% 0%, #1d2e52 0%, var(--navy-deep) 70%)}
+
+  .app{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;min-height:100vh;
+    background:linear-gradient(180deg,var(--navy) 0%,#13203A 100%);box-shadow:0 0 80px rgba(0,0,0,.5);overflow:hidden}
+  .app::before{content:"";position:absolute;inset:0;z-index:0;opacity:.4;pointer-events:none;
+    background-image:linear-gradient(var(--hair-soft) 1px,transparent 1px),linear-gradient(90deg,var(--hair-soft) 1px,transparent 1px);
+    background-size:60px 60px;
+    -webkit-mask-image:radial-gradient(120% 80% at 50% 6%, #000 20%, transparent 88%);
+            mask-image:radial-gradient(120% 80% at 50% 6%, #000 20%, transparent 88%)}
+
+  .topband{position:relative;z-index:2;text-align:center;padding:16px 0 14px;
+    background:linear-gradient(180deg,var(--navy-deep),rgba(15,26,48,0));border-bottom:1px solid var(--hair-soft)}
+  .brand{font-weight:800;letter-spacing:.3em;font-size:15px;
+    background:linear-gradient(176deg,var(--gold-hi),var(--gold-mid) 50%,var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  .brand small{display:block;font-size:9.5px;letter-spacing:.34em;color:var(--ink-soft);font-weight:600;margin-top:3px;-webkit-text-fill-color:var(--ink-soft)}
+
+  main{position:relative;z-index:1;padding:46px 24px 30px;text-align:center}
+
+  /* 完了マーク */
+  .check{width:78px;height:78px;border-radius:50%;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--gold);background:radial-gradient(circle at 50% 35%,rgba(201,162,39,.18),rgba(15,26,48,.2));
+    box-shadow:0 14px 34px -16px rgba(0,0,0,.7)}
+  .check svg{width:38px;height:38px;fill:none;stroke:var(--gold-hi);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+  .eyebrow{display:inline-block;font-size:12px;letter-spacing:.28em;color:var(--gold-mid);font-weight:700;margin-bottom:14px}
+  h1{font-weight:800;font-size:clamp(26px,7.6vw,34px);line-height:1.5;letter-spacing:.04em;color:var(--white);margin-bottom:18px}
+  .lead{color:var(--ink);font-weight:500;font-size:clamp(15px,4.2vw,16.5px);max-width:24em;margin:0 auto}
+  .key{background:linear-gradient(176deg,var(--yellow-hi),var(--yellow) 52%,var(--yellow-lo));
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800}
+
+  .ornament{display:flex;align-items:center;justify-content:center;gap:14px;margin:30px auto 26px;max-width:240px}
+  .ornament::before,.ornament::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+  .ornament::after{background:linear-gradient(90deg,var(--gold),transparent)}
+  .ornament i{width:7px;height:7px;background:linear-gradient(135deg,var(--gold-hi),var(--gold));transform:rotate(45deg)}
+
+  /* 任意ビジュアル */
+  .visual{position:relative;width:100%;aspect-ratio:1080/600;border:1px solid var(--hair-soft);border-radius:10px;overflow:hidden;background:var(--navy-2);margin:4px 0 26px}
+  .visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .visual .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--ink-soft);padding:18px}
+  .visual .ph .pf{position:absolute;inset:14px;border:1px dashed var(--hair)}
+  .visual .ph b{color:var(--gold-hi);font-size:14px;letter-spacing:.1em}
+  .visual .ph code{color:var(--gold-mid);font-size:12px}
+
+  /* ステップ */
+  .steps{text-align:left;max-width:380px;margin:0 auto 26px;border:1px solid var(--hair);border-radius:10px;
+    padding:20px 20px;background:linear-gradient(180deg,rgba(27,42,74,.55),rgba(15,26,48,.3))}
+  .step{display:flex;gap:14px;align-items:flex-start;padding:12px 0;position:relative}
+  .step + .step{border-top:1px solid var(--hair-soft)}
+  .step-no{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;border:1px solid var(--gold);color:var(--gold-hi);background:rgba(15,26,48,.5)}
+  .step.done .step-no{background:linear-gradient(135deg,var(--gold-hi),var(--gold-mid));color:var(--navy);border-color:transparent}
+  .step.now .step-no{border-color:var(--yellow);color:var(--yellow)}
+  .step-body b{display:block;color:var(--white);font-weight:700;font-size:15px;margin-bottom:2px}
+  .step.now .step-body b{color:var(--yellow)}
+  .step-body span{color:var(--ink-soft);font-size:13px}
+  .step-tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;padding:2px 9px;border-radius:2px;margin-left:8px;vertical-align:middle}
+  .step.done .step-tag{color:#0b8a3e;background:rgba(6,199,87,.18)}
+  .step.now .step-tag{color:var(--navy);background:linear-gradient(135deg,#ff9a3c,var(--orange))}
+
+  /* LINEボタン */
+  .line-btn{display:flex;align-items:center;justify-content:center;gap:11px;max-width:420px;margin:0 auto;
+    background:var(--line-green);color:#fff;font-weight:800;font-size:17px;text-decoration:none;
+    padding:19px;border-radius:10px;letter-spacing:.04em;
+    box-shadow:0 16px 34px -16px rgba(6,199,87,.6);transition:filter .2s,transform .2s}
+  .line-btn:hover{filter:brightness(.97);transform:translateY(-2px)}
+  .line-btn svg{width:23px;height:23px;fill:#fff}
+  .note{font-size:11.5px;color:var(--ink-soft);margin:16px auto 0;max-width:24em;line-height:1.8}
+  .back{display:inline-block;margin-top:26px;color:var(--ink-soft);font-size:12px;letter-spacing:.06em;text-decoration:none;border-bottom:1px solid var(--hair-soft)}
+  .back:hover{color:var(--gold-hi)}
+
+  footer{position:relative;z-index:1;background:var(--navy-deep);border-top:1px solid var(--hair-soft);padding:36px 24px 48px;margin-top:30px}
+  .footer-brand{text-align:center;font-weight:800;letter-spacing:.3em;color:var(--gold-mid);font-size:15px;margin-bottom:18px}
+  .disclaimer{font-size:11px;color:#7a86a0;line-height:1.9;list-style:none;max-width:420px;margin:0 auto}
+  .disclaimer li{margin-bottom:5px;padding-left:1em;text-indent:-1em}
+
+  .reveal{opacity:0;transform:translateY(20px);animation:rise .9s var(--ease) forwards}
+  .reveal.d1{animation-delay:.08s}.reveal.d2{animation-delay:.2s}.reveal.d3{animation-delay:.32s}.reveal.d4{animation-delay:.44s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;animation:none}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topband"><div class="brand">CRYPTO NOVA<small>知的フィンテックの、静かな一歩</small></div></div>
+
+  <main>
+    <div class="check reveal">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+    </div>
+    <div class="eyebrow reveal d1">REGISTRATION COMPLETE</div>
+    <h1 class="reveal d1">ご登録、<br>ありがとうございます。</h1>
+    <p class="lead reveal d2">メールアドレスのご登録が完了しました。<br>無料ガイドの受け取りは、<span class="key">あと1ステップ</span>です。</p>
+
+    <div class="ornament reveal d2"><i></i></div>
+
+    <!-- 任意：上部ビジュアル（images/thanks-visual.webp を置くと表示） -->
+    <div class="visual reveal d2">
+      <div class="ph" aria-hidden="true"><span class="pf"></span><b>サンクス用ビジュアル（任意）</b><code>images/thanks-visual.webp</code></div>
+      <img src="images/thanks-visual.webp" alt="" onerror="this.closest('.visual').style.display='none'">
+    </div>
+
+    <div class="steps reveal d3">
+      <div class="step done">
+        <span class="step-no">1</span>
+        <span class="step-body"><b>メールアドレスの登録<span class="step-tag">完了</span></b><span>受付が完了しました。</span></span>
+      </div>
+      <div class="step now">
+        <span class="step-no">2</span>
+        <span class="step-body"><b>公式LINEの友だち追加<span class="step-tag">いまここ</span></b><span>下のボタンから友だち追加してください。</span></span>
+      </div>
+      <div class="step">
+        <span class="step-no">3</span>
+        <span class="step-body"><b>無料ガイドを受け取る</b><span>LINEのメッセージでお届けします。</span></span>
+      </div>
+    </div>
+
+    <a class="line-btn reveal d4" id="lineBtn" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.32.07.77.21.88.49.1.25.07.64.03.9l-.14.85c-.04.25-.2.99.86.54 1.07-.45 5.74-3.38 7.83-5.79C21.36 13.5 22 11.9 22 10.13 22 5.64 17.52 2 12 2z"/></svg>
+      公式LINEを友だち追加する
+    </a>
+    <p class="note reveal d4">※友だち追加後、LINEのメッセージから無料ガイドをお受け取りいただけます。<br>※情報提供を目的とした内容で、投資助言・売買推奨・利益保証ではありません。</p>
+
+    <a class="back" href="index.html">トップページに戻る</a>
+  </main>
+
+  <footer>
+    <div class="footer-brand">CRYPTO NOVA</div>
+    <ul class="disclaimer">
+      <li>・本コンテンツおよびCrypto Novaは、仮想通貨市場に関する情報提供を目的としたものです。</li>
+      <li>・投資助言、特定銘柄の売買推奨、利益保証を行うものではありません。</li>
+      <li>・Crypto Novaは過去データに基づく市場データ分析ソフトであり、暗号資産の交換業・取引・ウォレット・投資助言の機能を有しません。</li>
+      <li>・暗号資産には価格変動リスクがあります。投資判断はご自身の責任で行ってください。</li>
+    </ul>
+  </footer>
+
+</div>
+
+<script>
+  // [REPLACE] 公式LINEの友だち追加URL
+  var LINE_URL = "https://lin.ee/XXXXXXX";
+  document.getElementById('lineBtn').href = LINE_URL;
+</script>
+</body>
+</html>
