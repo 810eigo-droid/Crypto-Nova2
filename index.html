@@ -15,6 +15,11 @@
      images/hero-sp2button.webp プレゼント受取ボタン（再利用） 1080 × 215
      images/section2-1.webp     共感：見出し下に差し込み（サイズ自由・自然比）
      images/section2-2.webp     共感：本文1の下に差し込み（サイズ自由・自然比）
+     images/quiet1.webp         視点：見出し下 1080 × 400
+     images/quiet2.webp         視点：本文1の下 1080 × 360
+     images/quiet3.webp         視点：本文2の下 1080 × 324
+     images/quiet4.webp         視点：本文3の下 1080 × 283
+     images/quiet5.webp         視点：本文4の下 1080 × 306
      images/sec-steps.webp      オファー：3ステップ図（任意） 1080 × 1350
      images/sec-ai.webp         信頼：AI解析の図（任意） 1080 × 1080
   ■ 背景の和柄タイル（1024×1024・透明背景・線のみ推奨）：
@@ -23,8 +28,8 @@
      images/Saaya-squere3.webp        紗綾形 → ④ 信頼
      images/Art-Deco-squere4.webp     アールデコ → クロージング
   公開：https://810eigo-droid.github.io/Crypto-Nova2/
-  [REPLACE] LINE_URL：公式LINEの友だち追加URLに差し替え
-  [REPLACE] フォームの送信先（utage等）：submitEmail() 内
+  ■ 登録フロー：このLPでメール取得 → サンクスページ → 公式LINE誘導 → プレゼント
+  [REPLACE] フォーム送信先＆サンクスページ遷移：submitEmail() 内（公式LINEはサンクスページ側）
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -222,6 +227,7 @@
   .imgslot.noimg .ph2 .pf{position:absolute;inset:14px;border:1px dashed var(--hair-soft)}
   .imgslot.noimg .ph2 b{color:var(--gold-hi);font-size:15px;letter-spacing:.1em}
   .imgslot.noimg .ph2 code{color:var(--gold-mid);font-size:12.5px}
+  .imgslot.noimg .ph2 small{color:var(--ink-soft);font-size:11.5px;letter-spacing:.14em}
   .figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
   .figure .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;padding:20px}
   .figure .ph .pf{position:absolute;inset:16px;border:1px dashed var(--hair)}
@@ -238,7 +244,7 @@
   .closing h2{font-size:clamp(26px,7.6vw,34px)}
 
   /* ===== フッター ===== */
-  footer{position:relative;z-index:1;background:var(--navy-deep);border-top:1px solid var(--hair-soft);padding:40px 24px 56px}
+  footer{position:relative;z-index:1;background:var(--navy-deep);border-top:1px solid var(--hair-soft);padding:40px 24px 120px}
   .footer-brand{text-align:center;font-weight:800;letter-spacing:.3em;color:var(--gold-mid);font-size:15px;margin-bottom:20px}
   .disclaimer{font-size:11px;color:#7a86a0;line-height:1.9;list-style:none}
   .disclaimer li{margin-bottom:5px;padding-left:1em;text-indent:-1em}
@@ -281,9 +287,47 @@
   .offer.light .or::before,.offer.light .or::after{background:rgba(201,162,39,.4)}
   .offer.light .mailrow input{background:#fff;border-color:rgba(201,162,39,.5);color:var(--navy)}
   .offer.light .mailrow input::placeholder{color:#9aa0ad}
-  .offer.light .mail-sub{border-color:#b8901c;color:#8a6a12}
-  .offer.light .mail-sub:hover{background:#b8901c;color:#fff}
+  .offer.light .mail-sub{background:var(--navy);border-color:var(--navy);color:#fff;font-size:16.5px;
+    box-shadow:0 12px 26px -14px rgba(22,35,63,.7), inset 0 1px 0 rgba(255,255,255,.12)}
+  .offer.light .mail-sub:hover{background:#0f1a30;color:var(--gold-hi)}
   .offer.light .form-note{color:#7a6f55}
+
+  /* ===== 実績データ訴求（LINE登録で公開） ===== */
+  .data-cta{margin:28px auto 0;max-width:420px;text-align:center;position:relative;
+    border:1px solid var(--gold);border-radius:10px;padding:26px 20px;
+    background:linear-gradient(180deg,rgba(201,162,39,.1),rgba(15,26,48,.25))}
+  .data-cta-label{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.16em;font-weight:800;
+    color:var(--navy);background:linear-gradient(135deg,var(--gold-hi),var(--gold-mid));
+    padding:5px 14px;border-radius:2px;margin-bottom:14px}
+  .data-cta-label::before{content:"";width:9px;height:9px;border:1.5px solid var(--navy);border-radius:2px;
+    box-shadow:inset 0 -3px 0 var(--navy)}
+  .data-cta p{color:var(--ink);font-weight:600;font-size:15px;margin-bottom:18px;letter-spacing:.02em}
+  .data-cta p strong{color:var(--white)}
+  .data-cta-btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+    background:linear-gradient(180deg,var(--gold-hi),var(--gold-mid));color:var(--navy);
+    font-family:inherit;font-weight:800;font-size:15px;letter-spacing:.04em;padding:14px 26px;border-radius:6px;
+    box-shadow:0 12px 26px -14px rgba(0,0,0,.7);transition:filter .2s,transform .2s}
+  .data-cta-btn::after{content:"▶";font-size:11px}
+  .data-cta-btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+
+  /* ===== フローティングバー（常時CTA）＆ 戻るボタン ===== */
+  .floatbar{position:fixed;left:50%;bottom:0;z-index:40;width:100%;max-width:var(--maxw);
+    transform:translateX(-50%) translateY(130%);transition:transform .4s var(--ease);
+    padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px));line-height:0;
+    background:linear-gradient(180deg,rgba(15,26,48,.82),var(--navy));
+    border-top:1px solid var(--hair);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  .floatbar.show{transform:translateX(-50%) translateY(0)}
+  .floatbar .btn-present{max-width:none}
+  .floatbar .btn-present img{border-radius:6px}
+  .floatbar .btn-present.noimg .fallback{padding:15px}
+
+  .totop{position:fixed;z-index:41;right:max(16px,calc(50% - var(--maxw)/2 + 14px));bottom:108px;
+    width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(180deg,#22335a,var(--navy));border:1px solid var(--gold);color:var(--gold-hi);
+    box-shadow:0 10px 24px -10px rgba(0,0,0,.7);cursor:pointer;
+    opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s,transform .3s,visibility .3s}
+  .totop.show{opacity:1;visibility:visible;transform:none}
+  .totop svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2}
 
   /* スクロール演出 */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
@@ -365,9 +409,41 @@
     <div class="wrap">
       <div class="eyebrow reveal">A QUIET WAY TO BEGIN</div>
       <h2 class="reveal" data-d="1">「なんとなく」で買わない人は、何を見ているのか。</h2>
-      <p class="body reveal" data-d="2">価格が動くニュースを見て、すぐ飛びつく人もいれば、静かにデータを確かめてから動く人もいます。</p>
-      <p class="body reveal" data-d="2">過去の値動きには、ある程度の“傾向”が残っていることがあります。感覚ではなく、その傾向を手がかりに考える——それが、これからの暗号資産との付き合い方かもしれません。</p>
-      <p class="body reveal" data-d="2">このガイドは、その<span class="key">「最初の一歩」</span>を、誰でも踏み出せるようにしたものです。</p>
+
+      <figure class="imgslot reveal">
+        <img src="images/quiet1.webp" alt="" onerror="this.closest('.imgslot').classList.add('noimg')">
+        <span class="ph2" aria-hidden="true"><span class="pf"></span><b>画像</b><code>images/quiet1.webp</code><small>1080 × 400</small></span>
+      </figure>
+
+      <p class="body reveal">価格が動くニュースを見て、すぐ飛びつく人もいれば、静かにデータを確かめてから動く人もいます。</p>
+
+      <figure class="imgslot reveal">
+        <img src="images/quiet2.webp" alt="" onerror="this.closest('.imgslot').classList.add('noimg')">
+        <span class="ph2" aria-hidden="true"><span class="pf"></span><b>画像</b><code>images/quiet2.webp</code><small>1080 × 360</small></span>
+      </figure>
+
+      <p class="body reveal">過去の値動きには、ある程度の“傾向”が残っていることがあります。</p>
+
+      <figure class="imgslot reveal">
+        <img src="images/quiet3.webp" alt="" onerror="this.closest('.imgslot').classList.add('noimg')">
+        <span class="ph2" aria-hidden="true"><span class="pf"></span><b>画像</b><code>images/quiet3.webp</code><small>1080 × 324</small></span>
+      </figure>
+
+      <p class="body reveal">感覚ではなく、その傾向を手がかりに考える</p>
+
+      <figure class="imgslot reveal">
+        <img src="images/quiet4.webp" alt="" onerror="this.closest('.imgslot').classList.add('noimg')">
+        <span class="ph2" aria-hidden="true"><span class="pf"></span><b>画像</b><code>images/quiet4.webp</code><small>1080 × 283</small></span>
+      </figure>
+
+      <p class="body reveal">——それが、これからの暗号資産との付き合い方かもしれません。</p>
+
+      <figure class="imgslot reveal">
+        <img src="images/quiet5.webp" alt="" onerror="this.closest('.imgslot').classList.add('noimg')">
+        <span class="ph2" aria-hidden="true"><span class="pf"></span><b>画像</b><code>images/quiet5.webp</code><small>1080 × 306</small></span>
+      </figure>
+
+      <p class="body reveal">このガイドは、その<span class="key">「最初の一歩」</span>を、誰でも踏み出せるようにしたものです。</p>
     </div>
   </section>
 
@@ -392,17 +468,12 @@
       </ul>
 
       <div class="form-box">
-        <a class="line-btn" href="#" id="lineBtn" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.32.07.77.21.88.49.1.25.07.64.03.9l-.14.85c-.04.25-.2.99.86.54 1.07-.45 5.74-3.38 7.83-5.79C21.36 13.5 22 11.9 22 10.13 22 5.64 17.52 2 12 2z"/></svg>
-          LINEでガイドを受け取る
-        </a>
-        <div class="or">OR</div>
         <div class="mailrow" id="mailrow">
           <input type="email" id="email" placeholder="メールアドレスを入力" autocomplete="email">
           <div class="err" id="err">メールアドレスの形式をご確認ください。</div>
-          <button class="mail-sub" type="button" onclick="submitEmail()">メールで受け取る</button>
+          <button class="mail-sub" type="button" onclick="submitEmail()">無料ガイドを受け取る</button>
         </div>
-        <div class="done" id="done">ご登録ありがとうございます。<br>ガイドをお送りします。</div>
+        <div class="done" id="done">ご登録ありがとうございます。<br>続いて、公式LINEのご案内へお進みください。</div>
         <p class="form-note">※登録は無料です。不要になればいつでも解除できます。<br>※情報提供を目的とした内容で、投資助言・売買推奨・利益保証ではありません。</p>
       </div>
     </div>
@@ -419,6 +490,12 @@
       </div>
       <p class="body reveal" data-d="2">Crypto Novaは、過去のトレンドデータをAIで解析する、暗号資産市場のデータ分析ソフトです。売買や価格予測を行うものではなく、“市場を見るための視点”を提供します。</p>
       <p class="body reveal" data-d="2">まずはこの無料のガイドで、その「最初の一歩」に触れてみてください。</p>
+
+      <div class="data-cta reveal" data-d="2">
+        <span class="data-cta-label">実績データ公開</span>
+        <p>過去の解析にもとづく<strong>詳しい実績データ</strong>は、<span class="key">ご登録後に公開</span>しています。気になる方は、数字でご確認ください。</p>
+        <a class="data-cta-btn" href="#offer">無料で実績データを受け取る</a>
+      </div>
     </div>
   </section>
 
@@ -446,16 +523,35 @@
 
 </div><!-- /.app -->
 
-<script>
-  // [REPLACE] 公式LINEの友だち追加URL
-  var LINE_URL = "https://lin.ee/XXXXXXX";
-  document.getElementById('lineBtn').href = LINE_URL;
+<!-- フローティングバー（常時CTA） -->
+<div class="floatbar" id="floatbar">
+  <a class="btn-present" href="#offer" aria-label="無料プレゼントを受け取る">
+    <img src="images/hero-sp2button.webp" alt="無料プレゼントを受け取る" onerror="this.closest('.btn-present').classList.add('noimg')">
+    <span class="fallback"><span class="k">無料プレゼント</span>を受け取る</span>
+  </a>
+</div>
 
-  // スクロール進捗
+<!-- 戻るボタン -->
+<button class="totop" id="totop" type="button" aria-label="ページ上部へ戻る">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg>
+</button>
+
+<script>
+  // 登録フロー：このLPはメール取得まで。公式LINE誘導はサンクスページ側で行う。
+
+  // スクロール進捗＋フローティングバー＋戻るボタン
   var prog = document.getElementById('progress');
-  function onScroll(){var h=document.documentElement;var max=h.scrollHeight-h.clientHeight;
-    prog.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  var floatbar = document.getElementById('floatbar');
+  var totop = document.getElementById('totop');
+  function onScroll(){
+    var h=document.documentElement;var max=h.scrollHeight-h.clientHeight;var y=h.scrollTop||window.scrollY||0;
+    prog.style.width=(max>0?(y/max*100):0)+'%';
+    var show = y > 560;                 // ヒーローを過ぎたら表示
+    floatbar.classList.toggle('show',show);
+    totop.classList.toggle('show',show);
+  }
   document.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  totop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
 
   // スクロール演出
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16,rootMargin:'0px 0px -6% 0px'});
@@ -467,7 +563,8 @@
     var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
     if(!ok){document.getElementById('err').style.display='block';return;}
     document.getElementById('err').style.display='none';
-    // [REPLACE] ここで utage 等のフォーム送信先へ v を送る
+    // [REPLACE] ここで utage 等へ v を送信し、サンクスページへ遷移させる
+    //   例) location.href = "thanks.html";  // サンクスページで公式LINEへ誘導→プレゼント
     document.getElementById('mailrow').style.display='none';
     document.getElementById('done').style.display='block';
   }
